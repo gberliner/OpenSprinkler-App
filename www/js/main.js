@@ -179,7 +179,7 @@ if ( window.MSApp ) {
 $( document )
 .one( "deviceready", function() {
 	/** Replace window.open with InAppBrowser if available */
-	if (window.cordova && window.cordova.InAppBrowser) {
+	if ( window.cordova && window.cordova.InAppBrowser ) {
 		window.open = window.cordova.InAppBrowser.open;
 	}
 
@@ -3680,6 +3680,8 @@ function showOptions( expandItem ) {
 					case "o41":
 						if ( page.find( "#o41-units" ).val() === "gallon" ) {
 							data = data * 3.78541;
+						} else if ( page.find( "#o41-units" ).val() === "milliliter" ) {
+							data = data / 1000.0;
 						}
 
 						opt.o41 = ( data * 100 ) & 0xff;
@@ -4004,6 +4006,7 @@ function showOptions( expandItem ) {
 					"<td class='tight-select'>" +
 						"<select id='o41-units' class='noselect' data-mini='true'>" +
 							"<option selected='selected' value='liter'>L/pulse</option>" +
+							"<option value='milliliter'>mL/pulse</option>" +
 							"<option value='gallon'>Gal/pulse</option>" +
 						"</select>" +
 					"</td>" +
